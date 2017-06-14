@@ -5,7 +5,7 @@ Any server pre-requisites are not covered by this project, and should be intiali
 
 ## Concepts
 * Docker Compose is used to run and link containers.
-** Cadvisor by Google is used to provide a webUI for monitoring the server/docker instance(s).
+ * Cadvisor by Google is used to provide a webUI for monitoring the server/docker instance(s).
 * Service binaries are exluded from the project, and should be injected prior to execution. This aspect is not considered or covered in the demo.
 * Deploy script will install, remove, or update the server based on input.
 * The deployed environment is determined by the requisite .setting file in ./env. This file will have all of the necessary details for the setup to function correctly.
