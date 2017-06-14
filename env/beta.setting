@@ -1,4 +1,4 @@
-git="http://github.com/cherma22/demo.git"
+git="https://github.com/cherma22/demo.git"
 installdir="/usr/share/testapp"
 AWS_ACCESS_KEY_ID="EXAMPLEID"
 AWS_SECRET_ACCESS_KEY="EXAMPLEKEY"
