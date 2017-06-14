@@ -1,9 +1,9 @@
-#Deploy
+# Deploy
 This repository is used as a demo to show deployment to a server.
 An environment settings file is used to determine the proper settings for installation and runtime.
 Any server pre-requisites are not covered by this project, and should be intialized by either template or user-data (e.g. Docker Engine, Docker-Compose).
 
-##Concepts
+## Concepts
 * Docker Compose is used to run and link containers.
 ** Cadvisor by Google is used to provide a webUI for monitoring the server/docker instance(s).
 * Service binaries are exluded from the project, and should be injected prior to execution. This aspect is not considered or covered in the demo.
@@ -12,7 +12,7 @@ Any server pre-requisites are not covered by this project, and should be intiali
 * The project assumes that the servers are located on AWS and generate files for backup in both the data and logs folders of the "services" server.
 * Additionally, the project assumes there are two types of servers being used, one "web" is the UI, the other "services" is the API/Backend for said UI.
 
-##Notes
+## Notes
 * There is a referenced command "servicecmd.sh" that is excluded as execution depends on the binaries being deployed.
 * In the current state, this project is only a reference, as it will not sufficiently deploy service binaries or a working web environment. It is only demonstration of a deployment model.
 
