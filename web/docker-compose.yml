@@ -30,6 +30,7 @@ services:
   
   dashboard:
     restart: always
-    image: helloworld
+    image: helloworld:latest
+    build: .
     ports:
       - 4200:80

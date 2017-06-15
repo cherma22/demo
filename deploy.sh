@@ -57,11 +57,11 @@ function install-base {
 function install-services {
     echo "Add S3 log sync to crontab"
     echo "# Backup logs to S3" >> /etc/crontab
-    echo "*/5 * * * * root $installdir/services/scripts/s3_sync_logs.sh -a sync-logs -e $env" >> /etc/crontab
+    echo "*/5 * * * * root $installdir/services/scripts/s3_action.sh -a sync-logs -e $env" >> /etc/crontab
 
     echo "Add S3 backups to crontab"
     echo "# Backup datamart to S3" >> /etc/crontab
-    echo "0 0 * * * root $installdir/services/scripts/s3_backup.sh -a backup-data -e $env" >> /etc/crontab
+    echo "0 0 * * * root $installdir/services/scripts/s3_action.sh -a backup-data -e $env" >> /etc/crontab
     
     echo "Adding services firewall rules..."
     firewall-cmd --add-port 10000/tcp --permanent
@@ -180,6 +180,9 @@ function update-services {
     
     echo "Update Deployment repo..."
     cd ../deploy
+
+    echo "Ensure local matches last commit..."
+    git checkout -- .
     git pull
     
     echo "Update services..."
@@ -195,10 +198,16 @@ function update-web {
     
     echo "Update Deployment repo..."
     cd deploy
+
+    echo "Ensure local matches last commit..."
+    git checkout -- .
     git pull
     
     echo "Docker login to Docker..."
     docker login $registry -u $dockeruser -p $dockerpass
+
+    echo "Set Service IP in nginx config"
+    sed -i -e "s/service_ip/$service_ip/g" nginx/vhost.d/web.conf
     
     echo "Update web UI dashboard..."
     cd ../web
@@ -267,7 +276,7 @@ if [[ "$type" = "" ]]; then
     exit
 fi
 
-if [[ "$type" = "services" ]]; then
+if [[ "$type" = "services" || "$type" = "web" ]]; then
     echo "Type set to $type"
     echo "Starting $action for $type"
 

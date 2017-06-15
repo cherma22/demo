@@ -23,7 +23,10 @@ Any server pre-requisites are not covered by this project, and should be intiali
 4. run ./deploy -a install -e $env -t services to install
 
 ## Commands
-* ./deploy.sh - command to install/remove/update the deployment
+* Each command has required input of -a (action) and -e (environment). Help may be displayed with -h.
+* ./deploy.sh - command to install/remove/update the deployment. Script has additional input of -t for type of server.
+* ./services/scripts/servicecmd.sh - command to start/stop services for the input environment.
+* ./services/scripts/s3_action.sh - command to either sync logs or backup data to S3.
 
 ## File Structure
 ```
@@ -35,20 +38,18 @@ demo
 │   ├── prod.setting
 │   └── qa.setting
 ├── services
-│   ├── bin
 │   ├── docker-compose.yml
-│   ├── lib
-│   ├── logs
-│   │   └── archive
 │   ├── nginx
 │   │   ├── nginx.conf
 │   │   └── vhost.d
 │   │       └── services.conf
-│   ├── scripts
-│   │   ├── s3_action.sh
-│   │   └── servicecmd.sh
-│   └── tools
+│   └── scripts
+│       ├── s3_action.sh
+│       └── servicecmd.sh
 └── web
+    ├── Dockerfile
+    ├── app
+    │   └── index.php
     ├── docker-compose.yml
     ├── nginx
     │   ├── nginx.conf
