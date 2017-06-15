@@ -57,11 +57,11 @@ function install-base {
 function install-services {
     echo "Add S3 log sync to crontab"
     echo "# Backup logs to S3" >> /etc/crontab
-    echo "*/5 * * * * root $installdir/services/scripts/s3_sync_logs.sh" >> /etc/crontab
+    echo "*/5 * * * * root $installdir/services/scripts/s3_sync_logs.sh -a sync-logs -e $env" >> /etc/crontab
 
     echo "Add S3 backups to crontab"
     echo "# Backup datamart to S3" >> /etc/crontab
-    echo "0 0 * * * root $installdir/services/scripts/s3_backup.sh" >> /etc/crontab
+    echo "0 0 * * * root $installdir/services/scripts/s3_backup.sh -a backup-data -e $env" >> /etc/crontab
     
     echo "Adding services firewall rules..."
     firewall-cmd --add-port 10000/tcp --permanent
